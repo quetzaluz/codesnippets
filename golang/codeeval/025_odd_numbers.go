@@ -1,12 +1,21 @@
 package main
 
-import "fmt"
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
-	for i := 0; i < 100; i++ {
+	var s [25]int
+	var j int = 24
+	for i := 0; i < 50; i++ {
 		if math.Mod(float64(i), 2) == 1 {
-	 		fmt.Println(i)
+			fmt.Println(i)
+			s[j] = 100 - i
+			j -= 1
 		}
+	}
+	for i := 0; i < 25; i ++ {
+		fmt.Println(s[i])
 	}
 }
