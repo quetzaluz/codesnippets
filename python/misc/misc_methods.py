@@ -86,3 +86,13 @@ def remove_duplicates(seq):
         if hasIt == False:
             new_seq.append(i)
     return new_seq
+
+#median function
+def median(seq):
+    s = sorted(seq)
+    l = len(s)
+    mid = l / 2
+    if l % 2 == 0:
+        return float(s[mid] + s[mid - 1]) / 2
+    else:
+        return s[mid]
