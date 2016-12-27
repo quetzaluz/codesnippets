@@ -2,8 +2,9 @@ import sys
 import re
 
 def ss(test):
-    i, s = test.split(',')
-    se = re.sub(r'([^\\])(\*)', r'\1.*', s)
+    i, s = test.strip().split(',')
+    se = re.sub(r'\*', '.*', s)
+    se = re.sub(r'(\\\.\*)', '\*', se)
     m = re.search(se, i)
     return 'true' if m else 'false'
 
