@@ -2,18 +2,29 @@ def mm(inp)
   return inp.split(' | ').map{|r| r.gsub(' ', '')}
 end
 
+def generate_coords(map, x, y)
+  r = []
+  if my = !!(y - 1 >= 0 && map[x][y - 1])
+    r << [x, y - 1]
+  end
+  if py = !!(map[x][y + 1])
+    r << [x, y + 1]
+  end
+  if x - 1 >= 0 && map[x - 1]
+    r << [x - 1, y]
+    r << [x - 1, y - 1] if my
+    r << [x - 1, y + 1] if py
+  end
+  if map[x + 1]
+    r << [x + 1, y]
+    r << [x + 1, y + 1] if py
+    r << [x + 1, y - 1] if my
+  end
+  return r
+end
+
 def fl(map, x=0, y=0)
   this_coord = map[x][y]
-  adjacent_coords = [
-    x - 1 >= 0 && map[x - 1] && map[x - 1][y] ? [x - 1, y] : nil,
-    map[x + 1] && map[x + 1][y] ? [x + 1, y] : nil,
-    map[x][y + 1] ? [x, y + 1] : nil,
-    y - 1 >= 0 && map[x][y - 1] ? [x, y - 1] : nil,
-    x - 1 >= 0 && y - 1 >= 0 && map[x - 1] && map[x - 1][y - 1] ? [x - 1, y - 1] : nil,
-    map[x + 1] && map[x + 1][y + 1] ? [x + 1, y + 1] : nil,
-    x - 1 >= 0 && map[x - 1] && map[x - 1][y + 1] ? [x - 1, y + 1] : nil,
-    y - 1 >= 0 && map[x + 1] && map[x + 1][y - 1] ? [x + 1, y - 1] : nil
-  ]
 
   if this_coord == 'o'
     map[x][y] = 'l'
@@ -21,8 +32,9 @@ def fl(map, x=0, y=0)
   end
   
   if isLake
+    adjacent_coords = generate_coords(map, x, y)
     adjacent_coords.each do |coord|
-      map = fl(map, coord[0], coord[1]) if coord
+      map = fl(map, coord[0], coord[1])
     end
   end
   
