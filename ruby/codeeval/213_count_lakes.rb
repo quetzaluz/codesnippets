@@ -35,9 +35,8 @@ def cl(inp)
   x = 0
   y = 0
   while y < m[0].length do
-    om = m.join('')
-    m = fl(m, x, y)
-    if m.join('') != om
+    if m[x][y] == 'o'
+      m = fl(m, x, y)
       lc += 1
     end
     if (x + 1) < m.length
