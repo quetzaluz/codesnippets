@@ -1,5 +1,5 @@
 def ends_w?(l)
-  w, f = l.split(',')
+  w, f = l.strip().split(',')
   w[(f.length * -1)..-1] == f
 end
 
