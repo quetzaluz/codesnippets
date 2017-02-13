@@ -1,16 +1,17 @@
 var fs  = require("fs");
+const TR = 'True'
+const FA = 'False'
+
 var ol = function(line) {
     a = line.split(',')
     b1 = [] 
-    b2 = []
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 8; i++) {
         b1.push(parseInt(a[i]))
-        b2.push(parseInt(a[i + 4]))
     }
-    if ((b1[0] > b2[2] || b2[0] > b1[2]) || (b1[1] < b2[3] || b2[1] < b1[3])) {
-        return 'False'
+    if ((b1[0] > b1[6] || b1[4] > b1[2]) || (b1[1] < b1[7] || b1[5] < b1[3])) {
+        return FA
     } else {
-        return 'True'
+        return TR
     }
 }
 
