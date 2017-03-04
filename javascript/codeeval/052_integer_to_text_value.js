@@ -5,6 +5,7 @@ D = {
     }
 T = { 2: 'Twenty', 3: 'Thirty', 4: 'Forty', 5: 'Fifty', 6: 'Sixty', 7: 'Seventy', 8: 'Eighty', 9: 'Ninety'}
 function grp(x, m, d) {
+    hundred = ten = one = 0;
     t = ''
     z = 0
     while (x > 0) {
@@ -27,6 +28,8 @@ function grp(x, m, d) {
         t += D[10 + one] + d
     } else if (one > 0) {
         t += D[one] + d
+    } else if (t != '') {
+        return t + d
     } else {
         return t
     }
@@ -38,8 +41,6 @@ function itd(line) {
     i = parseInt(line)
     if (i == 0) {
         return 'ZeroDollars'
-    } else if (i == 1) {
-        return 'OneDollar'
     } else if (i < 20) {
         return D[i] + 'Dollars'
     } else {
