@@ -1,6 +1,6 @@
 var fs  = require("fs");
 
-var words = "Mary had a little lamb its fleece was white as snow And everywhere that Mary went the lamb was sure to go It followed her to school one day which was against the rule It made the children laugh and play to see a lamb at school And so the teacher turned it out but still it lingered near And waited patiently about till Mary did appear Why does the lamb love Mary so the eager children cry Why Mary loves the lamb you know the teacher did reply"
+var words = "Mary had a little lamb its fleece was white as snow And everywhere that Mary went the lamb was sure to go It followed her to school one day which was against the rule It made the children laugh and play to see a lamb at school And so the teacher turned it out but still it lingered near And waited patiently about till Mary did appear Why does the lamb love Mary so the eager children cry Why Mary loves the lamb you know the teacher did reply "
 
 function gai (words, word) {
     var is = []
@@ -48,12 +48,13 @@ function ta (inpu) {
         }
     }
     for (var key in f) {
-        r.push([key.replace('-', ' '), (Math.round(f[key] / l * 1000, 3) / 1000).toFixed(3)])
+        r.push([key.replace('-', ' '), (f[key] / l).toFixed(4).substring(0,5)])
     }
     r = r.sort(function(a, b) {
         if (a[1] < b[1]) return 1;
         if (a[1] > b[1]) return -1;
-        return 0;
+        if (a[0] < b[0]) return -1;
+        if (a[0] > b[0]) return 1;
     })
     return r.join(';')
 }
