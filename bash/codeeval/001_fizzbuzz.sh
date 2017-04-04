@@ -1,5 +1,5 @@
-function fb {
-    arr=($1)
+while read line || [[ -n "$line" ]]; do
+    arr=($line)
     F=${arr[0]}
     B=${arr[1]}
     L=${arr[2]}
@@ -7,22 +7,17 @@ function fb {
     while  [[ $i -le $L ]]; do
         f=$(($i % $F))
         b=$(($i % $B))
-        if [f = 0 -a b = 0]; then
-            echo -ne 'FB'
-        elif f = 0; then
-            echo -ne 'F'
-        elif b = 0; then
-            echo -ne 'B'
-        else
-            echo -ne $i
+        if [ $f = 0 ]; then
+            echo -n 'F'
         fi
-        echo -ne ' '
-        (i++)
+        if [ $b = 0 ]; then
+            echo -n 'B'
+        fi
+        if [ $f != 0 ] && [ $b != 0 ]; then
+            echo -n "$i"
+        fi
+        echo -n ' '
+        let i=i+1
     done
-    echo -ne '\n'
-    echo ''
-}
-
-while read line || [[ -n "$line" ]]; do
-    fb $line
+    echo
 done < $1
