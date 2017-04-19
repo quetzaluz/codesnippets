@@ -19,7 +19,7 @@ function findS(line) {
     d.push(ds(x[0], x[2]))
     d.push(ds(x[1], x[3]))
     d = d.sort()
-    return d[0] == d[1] && d[0] == d[2] && d[0] == d[3] && d[4] == d[5]
+    return d[0] != 0 && d[0] == d[1] && d[0] == d[2] && d[0] == d[3] && d[4] == d[5]
 }
 
 fs.readFileSync(process.argv[2]).toString().split('\n').forEach(function (line) {
