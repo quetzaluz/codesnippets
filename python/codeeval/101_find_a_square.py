@@ -14,7 +14,7 @@ def find_s(test):
     d.append(ds(x[0], x[2]))
     d.append(ds(x[1], x[3]))
     d.sort()
-    if d[0] == d[1] and d[0] == d[2] and d[0] == d[3] and d[4] == d[5]:
+    if d[0] != 0 and d[0] == d[1] and d[0] == d[2] and d[0] == d[3] and d[4] == d[5]:
         return 'true'
     return 'false'
 
