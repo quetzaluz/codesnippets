@@ -1,23 +1,15 @@
-# AD 2H | H
-# KD KH | C
-# JH 10S | C
-# 2H
-# KD KH
-# JH
-
-
 import sys
 
-ORDER = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+ORDER = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 
 # handle suit based logic for ace
 def ha(c1, c2, s):
     c1td = c1[0] == '2' and c1[1] == s
     c2td = c2[0] == '2' and c2[1] == s
     if c1td:
-        return c1td
+        return c1
     elif c2td:
-        return c2td
+        return c2
     else:
         if c1[0] == 'A':
             return c1
