@@ -1,6 +1,6 @@
 import sys
 
-ORDER = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+ORDER = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
 # handle suit based logic for ace
 def ha(c1, c2, s):
@@ -11,12 +11,7 @@ def ha(c1, c2, s):
     elif c2td:
         return c2
     else:
-        if c1[0] == 'A':
-            return c1
-        elif c2[0] == 'A':
-            return c2
-        else:
-            return c1 + ' ' + c2
+        return gc(c1, c2, s)
 
 
 # Find greater card if no aces
@@ -27,16 +22,12 @@ def gc(c1, c2, s):
     else:
         c1i = ORDER.index(c1[0])
         c1si = 1
-
-
     if len(c2) == 3:
         c2i = ORDER.index('10')
         c2si = 2
     else:
         c2i = ORDER.index(c2[0])
         c2si = 1
-
-
     if c1i > c2i:
         return c1
     elif c1i < c2i:
@@ -56,7 +47,6 @@ def st(inp):
     cs = inps[0].split(' ')
     c1 = cs[0]
     c2 = cs[1]
-
     if c1[0] == 'A' or c2[0] == 'A':
         return ha(c1, c2, s)
     else:
