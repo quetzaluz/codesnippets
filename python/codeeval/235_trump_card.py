@@ -2,7 +2,6 @@ import sys
 
 ORDER = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
-# Find greater card if no aces
 def gc(c1, c2, s):
     if c1[-1] == s:
         return c1
