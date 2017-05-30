@@ -4,7 +4,8 @@ ORDER = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
 def gc(c1, c2, s):
     if c1[-1] == s:
-        return c1
+        if c2[-1] != s:
+            return c1
     elif c2[-1] == s:
         return c2
     c1i = ORDER.index(c1[:-1])
