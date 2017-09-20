@@ -2,18 +2,22 @@ import sys
 
 def c2c(coords):
 	c = coords.split(' ')
-	dist_ns = int(c[3]) - int(c[1])
-	dist_ew = int(c[0]) - int(c[2])
+	x1 = int(c[0])
+	y1 = int(c[1])
+	x2 = int(c[2])
+	y2 = int(c[3])
+	dist_ns = y2 - y1
+	dist_ew = x1 - x2
 	dir = ''
-	if dist_ns > 0:
-		dir += 'N'
-	elif dist_ns < 0:
-		dir += 'S'
-	elif dist_ew == 0:
+	if dist_ew == 0 and dist_ns == 0:
 		return 'here'
-	if dist_ew > 0:
+	if y2 > y1:
+		dir += 'N'
+	elif y2 < y1:
+		dir += 'S'
+	if x2 > x1:
 		dir += 'E'
-	elif dist_ew < 0:
+	elif x2 < x1:
 		dir += 'W'
 	return dir
 
