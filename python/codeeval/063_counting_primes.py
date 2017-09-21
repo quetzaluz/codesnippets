@@ -4,7 +4,7 @@ def find_primes(start_end_str):
     start = int(start_end[0])
     end = int(start_end[1])
     prime_count = 0
-    for i in range(start, end):
+    for i in range(start, end + 1):
         is_prime = True
         for k in range(2, i - 1):
             if i % k == 0:
