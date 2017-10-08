@@ -9,7 +9,7 @@ function doors(inp) {
       var modeq = t + 1
       for (var j = 0; j < d; j++) {
         if (t == 0 && i == 0) {
-          r.push(j % 2)
+          r.push(1 - j % 2)
         } else {
           if (j % mod == modeq) {
             r[j] = r[j] == 1 ? 0 : 1
@@ -18,6 +18,8 @@ function doors(inp) {
       }
     }
   }
+
+  r[d-1] = r[d-1] == 1 ? 0 : 1
 
   result = 0
   for (var i = 0; i < d; i++) {
