@@ -3,18 +3,21 @@ function doors(inp) {
   var d = parseInt(inp[0])
   var ite = parseInt(inp[1])
   var r = []
+  for (var j = 0; j < d; j++) {
+    r.push(1)
+  }
   for (var i = 0; i < ite; i++) {
-    for (var t = 0; t < 2; t++) {
-      var mod = t + 2;
-      var modeq = t + 1
-      for (var j = 0; j < d; j++) {
-        if (t == 0 && i == 0) {
-          r.push(1 - j % 2)
-        } else {
-          if (j % mod == modeq) {
-            r[j] = r[j] == 1 ? 0 : 1
-          }
-        }
+    for (var j = 0; j < d; j++) {
+      mod2 = j % 2
+      mod3 = j % 3
+      if (mod2 == 1 && mod3 == 2) {
+        r[j] = 1
+      }
+      else if (mod2 == 1) {
+        r[j] = 0
+      }
+      else if (mod3 == 2) {
+        r[j] = 0
       }
     }
   }
