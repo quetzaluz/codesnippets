@@ -2,7 +2,12 @@ var fs  = require("fs");
 
 function trunc(inp) {
     if (inp.length > 55) {
-        return inp.substr(0,40).trim() + '... <Read More>'
+        var newStr = inp.substr(0,40)
+        var lastSpaceIndex = newStr.lastIndexOf(' ')
+        if (lastSpaceIndex) {
+            newStr = newStr.substr(0, lastSpaceIndex)
+        }
+        return newStr + '... <Read More>'
     } else {
         return inp
     }
