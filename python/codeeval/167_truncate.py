@@ -1,6 +1,7 @@
 import sys
 
 def trunc(inp):
+    inp = inp.rstrip()
     if len(inp) > 55:
         new_str = inp[0:40]
         try:
