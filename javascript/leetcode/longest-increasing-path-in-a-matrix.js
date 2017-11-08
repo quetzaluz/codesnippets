@@ -5,22 +5,20 @@
  * longestIncreasingPath([[9,9,4],[6,6,8],[2,1,1]]) => 4
  */
 var longestIncreasingPath = function(matrix) {
-    var lP = [];
+    var lP = []; // for storing longest paths at each coord
     var rL = matrix.length;
     var max = 0;
     var i,j;
     
     if (rL === 0) { return 0 }
-    
+
     var cL = matrix[0].length;
-    
-    for (i = 0; i < rL; i++) {
-        lP.push(new Array(cL))
-    }
-    
+
+    // initialize matrix for storing longest paths.
     for (i = 0; i < rL; i++) {
         for (j = 0; j < cL; j++) {
-            lP[i][j] = 0
+            if (j === 0) { lP.push(new Array(cL)) }
+            lP[i][j] = 0; // initialize longest path at this coord
         }
     }
 
@@ -30,7 +28,7 @@ var longestIncreasingPath = function(matrix) {
             max = Math.max(max, pP(i, j, rL, cL, matrix, lP))
         }
     }
-    
+
     return max;
 };
 
@@ -41,7 +39,7 @@ var pP = function (i, j, rL, cL, matrix, lP) {
     var cY = [0, 1, -1, 0]
     var max = 1
     var m, x, y;
-    
+
     for (m = 0; m < 4; m++) {
         x = cX[m] + i;
         y = cY[m] + j;
