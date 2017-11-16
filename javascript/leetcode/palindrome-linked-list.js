@@ -11,15 +11,18 @@
  */
 var isPalindrome = function(head) {
     var thisNode = head;
-    var seenVals = {}
+    var nodeStack = [] // reverses linked list, O(n) space complexity
     while (thisNode) {
-        seenVals[thisNode.val] = (seenVals[thisNode.val] && seenVals[thisNode.val] + 1) || 1
+        nodeStack.push(thisNode)
         thisNode = thisNode.next
     }
-    var countOdds = 0 // by definition, all characters in a palindrome are even except one if length is odd
-    for (key in seenVals) {
-        countOdds += seenVals[key] % 2
-        if (countOdds > 1) return false
+
+    // now start over and compare
+    var thisNode = head;
+    while(thisNode) {
+        inverseNode = nodeStack.pop()
+        if (inverseNode.val != thisNode.val) return false
+        thisNode = thisNode.next
     }
-    return countOdds <= 1 // Still need to evaluate for edge case of two items
+    return true
 };
