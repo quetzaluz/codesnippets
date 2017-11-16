@@ -5,12 +5,13 @@
 var countBits = function(num) {
     var result = []
     for (var i = 0; i <= num; i++) {
-        ct = 0
-        bitString = i.toString(2)
-        for (var j = 0; j < bitString.length; j++) {
-            ct += parseInt(bitString[j])
-        }
-        result.push(ct)
+        var countOne = 0
+        var thisNum = i;
+        while (thisNum) {
+            if (thisNum % 2 !== 0) countOne++
+            thisNum = ~~(thisNum / 2)
+        } 
+        result.push(countOne)
     }
     return result
 };
