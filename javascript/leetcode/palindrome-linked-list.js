@@ -17,11 +17,16 @@ var isPalindrome = function(head) {
         thisNode = thisNode.next
     }
 
-    // now start over and compare
+    // now start over for comparrison
+    // Find midpoint of linked list so that we can break out early
     var thisNode = head;
+    var midpoint = ~~(nodeStack.length / 2)
+    var currentIndex = 0
     while(thisNode) {
         inverseNode = nodeStack.pop()
         if (inverseNode.val != thisNode.val) return false
+        currentIndex++
+        if (currentIndex === midpoint) {break}
         thisNode = thisNode.next
     }
     return true
