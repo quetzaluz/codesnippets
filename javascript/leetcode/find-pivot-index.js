@@ -3,17 +3,14 @@
  * @return {number}
  */
 var pivotIndex = function(nums) {
-    var numsLength = nums.length
-    for (var i = 0; i < numsLength; i++) {
-        var leftSum = 0
-        var rightSum = 0
-        for (var l = 0; l < i; l++) {
-            leftSum += nums[l]
-        }
-        for (var r = (numsLength - 1); r > i; r--) {
-            rightSum += nums[r]
-        }
-        if (leftSum == rightSum) {return i}
+    var sum = 0;
+    var leftSum = 0
+    for (var i = 0; i < nums.length; i++) {
+        sum += nums[i]
+    }
+    for (var i = 0; i < nums.length; i++) {
+        if (leftSum == sum - leftSum - nums[i]) return i;
+        leftSum += nums[i]
     }
     return -1
 };
