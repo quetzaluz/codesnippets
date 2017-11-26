@@ -11,15 +11,14 @@
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    var candidates = []
-    var currentNode = head
-    while (currentNode) {
-      if (candidates.indexOf(currentNode.val) >= 0) {
+    var candidates = {}
+    while (head) {
+      if (candidates[head.val]) {
         return true
       } else {
-        candidates.push(currentNode.val)
+        candidates[head.val] = 1
       }
-      currentNode = currentNode.next
+      head = head.next
     }
     return false
 };
