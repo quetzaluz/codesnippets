@@ -16,7 +16,9 @@ var addTwoNumbers = function(l1, l2) {
     var currNode1 = l1;
     var currNode2 = l2;
     while (currNode1 || currNode2) {
-    sum = currNode1.val + currNode2.val
+    currNode1 = currNode1 || new ListNode(0)
+    currNode2 = currNode2 || new ListNode(0)
+    sum = currNode1.val + currNode2.val + carry
     if (sum >= 10) {
       newCarry = 1
       sum -= 10
@@ -27,12 +29,16 @@ var addTwoNumbers = function(l1, l2) {
         newListHead = new ListNode(sum)
         currentNewNode = newListHead
       } else {
-        currentNewNode.next = new ListNode(sum + carry)
+        currentNewNode.next = new ListNode(sum)
         currentNewNode = currentNewNode.next
+        carry = 0
       }
       carry = newCarry
       currNode1 = currNode1.next
       currNode2 = currNode2.next
+    }
+    if (carry) {
+      currentNewNode.next = new ListNode(carry)
     }
     return newListHead
 };
