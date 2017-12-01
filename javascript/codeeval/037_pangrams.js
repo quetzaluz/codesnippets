@@ -38,6 +38,7 @@ function clone(obj) {
 
 var missingChars = function (line, alpha) {
   var found = 0;
+  line = line.toLowerCase();
   for (var i = 0; i < line.length; i++) {
     if (alpha[line[i]]) {
       found += 1
