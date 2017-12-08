@@ -5,8 +5,7 @@
 var lengthOfLongestSubstring = function(s) {
     currentSubstr = ''
     longestSubstr = ''
-    lastIdx = 0
-    for (var i = (lastIdx + 0); i < s.length; i++) {
+    for (var i = 0; i < s.length; i++) {
         indexOfExisting = currentSubstr.indexOf(s[i])
         if (indexOfExisting == -1) {
             currentSubstr += s[i]
