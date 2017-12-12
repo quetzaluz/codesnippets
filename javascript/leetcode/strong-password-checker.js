@@ -3,9 +3,9 @@
  * @return {number}
  */
 var strongPasswordChecker = function(s) {
-    conditionsNeeded = 5 // length, uppercase, lowercase, digit, no repeat
+    conditionsNeeded = 4 // uppercase, lowercase, digit, no repeat
     conditionsMet = 0
-    hasStringOfLowercase = false
+    hasStringOfLowercase = 0
     hasLower = 0
     hasUpper = 0
     hasDigit = 0
@@ -18,7 +18,7 @@ var strongPasswordChecker = function(s) {
         } else {
             lastCharaCount = 0
         }
-        if (lastCharaCount == 3) {hasStringOfLowercase = true}
+        if (lastCharaCount == 3) {hasStringOfLowercase++}
         if (isNaN(s[i])) {
             if (s[i] == s[i].toLowerCase()) {
                 hasLower = 1
@@ -30,8 +30,8 @@ var strongPasswordChecker = function(s) {
         }
         lastChara = s[i]
     }
-    conditionsMet = (hasStringOfLowercase ? 0 : 1) + (hasCorrectLength ? 1 : 0) + hasLower + hasUpper + hasDigit
-    if (conditionsMet == conditionsNeeded) {
+    conditionsMet = (hasStringOfLowercase ? 0 : 1) + hasLower + hasUpper + hasDigit
+    if (hasCorrectLength && conditionsMet == conditionsNeeded) {
         return 0
     } else if (!hasCorrectLength) {
         if (s.length < 6) {
