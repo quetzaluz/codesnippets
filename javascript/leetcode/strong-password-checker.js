@@ -3,9 +3,9 @@
  * @return {number}
  */
 var strongPasswordChecker = function(s) {
-    conditionsNeeded = 4 // uppercase, lowercase, digit, no repeat
+    conditionsNeeded = 3 // uppercase, lowercase, digit
     conditionsMet = 0
-    hasStringOfLowercase = 0
+    consecutiveSequences = 0
     hasLower = 0
     hasUpper = 0
     hasDigit = 0
@@ -16,9 +16,12 @@ var strongPasswordChecker = function(s) {
         if (s[i] == lastChara) {
             lastCharaCount++
         } else {
-            lastCharaCount = 0
+            lastCharaCount = 1
         }
-        if (lastCharaCount == 3) {hasStringOfLowercase++}
+        if (lastCharaCount == 3) {
+            lastCharaCount = 0
+            consecutiveSequences++
+        }
         if (isNaN(s[i])) {
             if (s[i] == s[i].toLowerCase()) {
                 hasLower = 1
@@ -30,16 +33,16 @@ var strongPasswordChecker = function(s) {
         }
         lastChara = s[i]
     }
-    conditionsMet = (hasStringOfLowercase ? 0 : 1) + hasLower + hasUpper + hasDigit
-    if (hasCorrectLength && conditionsMet == conditionsNeeded) {
+    conditionsMet = hasLower + hasUpper + hasDigit
+    if (hasCorrectLength && !consecutiveSequences && conditionsMet == conditionsNeeded) {
         return 0
     } else if (!hasCorrectLength) {
         if (s.length < 6) {
-            return Math.max(6 - s.length, conditionsNeeded - conditionsMet)
+            return Math.max(6 - s.length, Math.max(conditionsNeeded - conditionsMet, consecutiveSequences))
         } else {
-            return Math.max(s.length - 20, conditionsNeeded - conditionsMet)
+            return (s.length - 20) + Math.max(conditionsNeeded - conditionsMet, consecutiveSequences - (s.length - 20))
         }
     } else {
-        return conditionsNeeded - conditionsMet
+        return Math.max(conditionsNeeded - conditionsMet, consecutiveSequences)
     }
 };
