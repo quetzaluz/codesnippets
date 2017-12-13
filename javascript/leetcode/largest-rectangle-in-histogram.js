@@ -7,23 +7,26 @@ var largestRectangleArea = function(heights) {
     i = 0
     if (heights.length == 0) { return 0 }
     while(i < heights.length) {
-        thisSize = heights[i]
         thisHeight = heights[i]
-        for (var j = i + 1; j < heights.length; j++) {
-            if (thisHeight <= heights[j]) {
-                thisSize += heights[i]
+        while (thisHeight >= 1) {
+            thisSize = thisHeight
+            for (var j = i + 1; j < heights.length; j++) {
+                if (thisHeight <= heights[j]) {
+                    thisSize += thisHeight               
+                } else {
+                    break
+                }
+            }
+            nextHeight = heights[i + 1]
+            if (thisSize > maxSize) {maxSize = thisSize}
+            if (nextHeight < thisHeight) {
+                thisHeight = nextHeight
+            } else if (!nextHeight) {
+                thisHeight = 0
             } else {
-                break
+                thisHeight--
             }
         }
-        for (var j = i - 1; j >= 0; j--) {
-            if (thisHeight <= heights[j]) {
-                thisSize += heights[i]
-            } else {
-                break
-            }
-        }
-        if (thisSize > maxSize) {maxSize = thisSize}
         i++
     }
     return maxSize
