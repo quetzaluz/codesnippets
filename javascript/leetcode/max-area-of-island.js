@@ -7,7 +7,7 @@ var maxAreaOfIsland = function(grid) {
     seen = []
     for (var i = 0; i < grid.length; i++) {
         for (var j = 0; j < grid[i].length; j++) {
-            if (grid[i][j] == 1 && seen.indexOf([i, j] == -1)) {
+            if (grid[i][j] == 1 && seen.indexOf(i +','+j) == -1) {
                 stack = [[i, j]]
                 seen.push(i+','+j)
                 thisArea = 0
