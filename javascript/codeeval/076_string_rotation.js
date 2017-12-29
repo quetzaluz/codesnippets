@@ -4,7 +4,7 @@ function hasRotation (s1, s2) {
 	sc1 = 0
 	sc2 = 0
 	while (true) {
-		if (sc2 == s2.length && !matchFound) {
+		if (sc2 >= s2.length && !matchFound) {
 			return 'False'
 		}
 		if (sc2 > s2.length - 1) {
@@ -17,9 +17,9 @@ function hasRotation (s1, s2) {
 			if (sc1 == s1.length -1) { return 'True' }
 			sc2++
 			sc1++
-		} else if (matchFound) {
-			return 'False'
 		} else {
+			matchFound = false
+			sc1 = 0
 			sc2++
 		}
 	}
