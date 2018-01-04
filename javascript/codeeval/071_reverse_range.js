@@ -4,7 +4,7 @@ function reverseRange(nums, k) {
     i = 0
     while (i < nums.length && i + k - 1 < nums.length) {
         c = 0
-        for (var j = i + k - 1; j > i; j--) {
+        for (var j = i + k - 1; j >= i + Math.floor(k / 2); j--) {
             tmp = nums[i + c]
             nums[i + c] = nums[j]
             nums[j] = tmp
