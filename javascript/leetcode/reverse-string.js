@@ -3,9 +3,11 @@
  * @return {string}
  */
 var reverseString = function(s) {
-    t = ''
-    for (var i = (s.length - 1); i >= 0; i--) {
-        t += s[i]
+    st = s.split('')
+    for (var i = 0; i < Math.floor(st.length / 2); i++) {
+        t = st[i]
+        st[i] = st[st.length - i - 1]
+        st[st.length - i - 1] = t
     }
-    return t
+    return st.join('')
 };
