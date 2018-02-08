@@ -11,7 +11,7 @@ var isValid = function(s) {
             v['p'].cnt += 1
             v['p'].idx.push(i)
         } else if (l == ')') {
-            if (v['p'].cnt == 0 || v['s'].idx[v['s'].idx.length - 1] > v['p'].idx[v['p'].idx.length - 1] || v['c'].idx[v['c'].idx.length - 1] > v['p'].idx[v['p'].idx.length - 1]) {
+            if (hasUnclosedBrackets(v, 'p', 'c', 's')) {
                 return false
             } else {
                 v['p'].cnt -= 1
@@ -21,7 +21,7 @@ var isValid = function(s) {
             v['s'].cnt += 1
             v['s'].idx.push(i)
         } else if (l == ']') {
-            if (v['s'].cnt == 0 || v['p'].idx[v['p'].idx.length - 1] > v['s'].idx[v['s'].idx.length - 1] || v['c'].idx[v['c'].idx.length - 1] > v['s'].idx[v['s'].idx.length - 1]) {
+            if (hasUnclosedBrackets(v, 's', 'p', 'c')) {
                 return false
             } else {
                 v['s'].cnt -= 1
@@ -31,7 +31,7 @@ var isValid = function(s) {
             v['c'].cnt += 1
             v['c'].idx.push(i)
         } else if (l == '}') {
-            if (v['c'].cnt == 0 ||  v['p'].idx[v['p'].idx.length - 1] > v['c'].idx[v['c'].idx.length - 1] || v['s'].idx[v['s'].idx.length - 1] > v['c'].idx[v['c'].idx.length - 1]) {
+            if (hasUnclosedBrackets(v, 'c', 'p', 's')) {
                 return false
             } else {
                 v['c'].cnt -= 1
@@ -46,3 +46,9 @@ var isValid = function(s) {
         return true
     }
 };
+
+function hasUnclosedBrackets(values, thisType, otherType1, otherType2) {
+    return values[thisType].cnt == 0 ||
+           values[otherType1].idx[values[otherType1].idx.length - 1] > values[thisType].idx[values[thisType].idx.length - 1] ||
+           values[otherType2].idx[values[otherType2].idx.length - 1] > values[thisType].idx[values[thisType].idx.length - 1]
+}
