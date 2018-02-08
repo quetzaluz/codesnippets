@@ -2,41 +2,26 @@
  * @param {string} s
  * @return {boolean}
  */
- // current failing case - "[([]])"
+
 var isValid = function(s) {
     v = {p: {idx: [], cnt: 0}, s: {idx: [], cnt: 0}, c: {idx: [], cnt: 0}}
     for (var i = 0; i <= s.length; i++) {
         l = s[i]
         if (l == '(') {
-            v['p'].cnt += 1
-            v['p'].idx.push(i)
+            v = updateForOpenBrackets(v, 'p', i)
         } else if (l == ')') {
-            if (hasUnclosedBrackets(v, 'p', 'c', 's')) {
-                return false
-            } else {
-                v['p'].cnt -= 1
-                v['p'].idx.pop()
-            }
+            v = updateForClosedBrackets(v, 'p', 'c', 's')
+            if (!v) { return v }
         } else if (l == '[') {
-            v['s'].cnt += 1
-            v['s'].idx.push(i)
+            v = updateForOpenBrackets(v, 's', i)
         } else if (l == ']') {
-            if (hasUnclosedBrackets(v, 's', 'p', 'c')) {
-                return false
-            } else {
-                v['s'].cnt -= 1
-                v['s'].idx.pop()
-            }
+            v = updateForClosedBrackets(v, 's', 'p', 'c')
+            if (!v) { return v }
         } else if (l == '{') {
-            v['c'].cnt += 1
-            v['c'].idx.push(i)
+            v = updateForOpenBrackets(v, 'c', i)
         } else if (l == '}') {
-            if (hasUnclosedBrackets(v, 'c', 'p', 's')) {
-                return false
-            } else {
-                v['c'].cnt -= 1
-                v['c'].idx.pop()
-            }
+            v = updateForClosedBrackets(v, 'c', 'p', 's')
+            if (!v) { return v }
         }
         prev = l
     }
@@ -51,4 +36,21 @@ function hasUnclosedBrackets(values, thisType, otherType1, otherType2) {
     return values[thisType].cnt == 0 ||
            values[otherType1].idx[values[otherType1].idx.length - 1] > values[thisType].idx[values[thisType].idx.length - 1] ||
            values[otherType2].idx[values[otherType2].idx.length - 1] > values[thisType].idx[values[thisType].idx.length - 1]
+}
+
+function updateForClosedBrackets(values, thisType, otherType1, otherType2) {
+    // returns values or false if found to be invalid
+    if (hasUnclosedBrackets(values, thisType, otherType1, otherType2)) {
+        return false
+    } else {
+        v[thisType].cnt -= 1
+        v[thisType].idx.pop()
+        return v
+    }
+}
+
+function updateForOpenBrackets(values, thisType, idx) {
+    v[thisType].cnt += 1
+    v[thisType].idx.push(idx)
+    return v
 }
