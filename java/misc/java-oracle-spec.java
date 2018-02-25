@@ -17,7 +17,7 @@ public class QualificationTest {
 			min = b;
 		}
 
-		assert (min < a);
+		assert (min <= a && min <= b && (min == a || min == b));
 
 		return min;
 	}
@@ -31,7 +31,7 @@ public class QualificationTest {
         final int i = x >>> 31;
         int result = (x ^ (~i + 1)) + i;
 
-        assert (Util.imply(x > 0, result == x));
+        assert (Util.imply(x >= 0, result == x)) && Util.imply(x < 0, result == x * -1);
 
         return result;
     }
@@ -49,7 +49,7 @@ public class QualificationTest {
 
 			intSet.add(element);
 
-			assert (old_intSet.size() == intSet.size() + 1 && old_element == element);
+			assert (intSet == null || (Util.imply(!old_set.contains(element), old_intSet.size() == intSet.size() + 1 && old_element == element) && Util.imply(old_set.contains(element), old_intSet.size() == intSet.size() && old_element == element)));
 		}
 	}
 
@@ -64,7 +64,7 @@ public class QualificationTest {
 
 			intArray[ind] = intArray[ind] + 1;
 
-			assert (!Arrays.equals(old_array, intArray));
+			assert (Util.imply((intArray == null || ind < 0 || ind > intArray.length)), Arrays.equals(old_array, intArray)) || Util.imply((intArray != null && (ind >= 0 && ind < intArray.length)), !Arrays.equals(old_array, intArray)));
 		}
 	}
 }
