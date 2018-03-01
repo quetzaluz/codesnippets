@@ -10,5 +10,7 @@ class Solution:
                 this_sum += nums[i]
                 if this_sum > max_s:
                     max_s = this_sum
+                elif this_sum < 0:
+                    break
             start_idx += 1
         return max_s
