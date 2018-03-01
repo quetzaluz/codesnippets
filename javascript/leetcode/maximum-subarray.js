@@ -14,6 +14,8 @@ var maxSubArray = function(nums) {
             thisSum += nums[i]
             if (thisSum > maxS) {
                 maxS = thisSum
+            } else if (thisSum < 0) {
+                break
             }
         }
         startIdx++
