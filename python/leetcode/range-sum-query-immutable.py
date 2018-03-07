@@ -5,13 +5,20 @@ class NumArray:
         :type nums: List[int]
         """
         self.nums = nums
+        self.cache = {}
+        self.build_cache()
+
+    def build_cache(self):
+        for i in range(len(self.nums)):
+            sum = 0
+            for k in range(i, len(self.nums)):
+                sum += self.nums[k]
+                self.cache['%s,%s' % (i, k)] = sum
 
 
     def sumRange(self, i, j):
-        s = 0
-        for k in range(i, j+1):
-            s += self.nums[k]
-        return s
+        if '%s,%s' % (i, j) in self.cache:
+            return self.cache['%s,%s' % (i, j)]
 
 
 # Your NumArray object will be instantiated and called as such:
