@@ -1,0 +1,23 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+    <style>
+      a{
+        color: blue;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body ng-app="app">
+  <div ng-controller="readMoreCntroller">
+    Original Text - {{ text }}<br />
+
+    <br />
+
+    Textafter applying filter :
+    <hm-read ng-init="hmfulltext=true" hmtext="{{ text }}" hmlimit="100"></hm-read>
+
+  </div>
+</body>
+</html>
