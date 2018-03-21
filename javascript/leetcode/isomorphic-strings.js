@@ -12,7 +12,6 @@ var encodeIsomorphic = function(str) {
     sR = ''
     sC = 0
     for (var i = 0; i < str.length; i++) {
-        debugger
         if (sH[str[i]] != null) {
             sR += sH[str[i]]
         } else {
@@ -21,6 +20,6 @@ var encodeIsomorphic = function(str) {
             sC++
         }
     }
-    console.log(sH)
+
     return sR
 } 
