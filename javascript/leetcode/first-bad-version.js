@@ -17,24 +17,17 @@ var solution = function(isBadVersion) {
      * @param {integer} n Total versions
      * @return {integer} The first bad version
      */
-    firstBad = null
     return function(n) {
-        l = null
-        m = n
-        while (l === null) {
+        l = 1
+        r = n
+        while (l < r) {
+            m = Math.floor(l + (r - l) / 2)
             if (isBadVersion(m)) {
-                if (m == 1) { return m }
-                m = Math.ceil(m / 2)
+                r = m
             } else {
-                l = m
+                l = m + 1
             }
         }
-        while (l <= n) {
-            if (isBadVersion(l)) {
-                return l
-            }
-            l++
-        }
-        return -1
+        return l
     };
 };
