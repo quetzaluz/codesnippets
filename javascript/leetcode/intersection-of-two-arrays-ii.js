@@ -20,7 +20,7 @@ var intersect = function(nums1, nums2) {
             seen[nums2[i]] = {'ct1': 0, 'ct2': 1}
         }
     }
-    console.log(seen)
+
     for (key in seen) {
         for (var j = 0; j < Math.min(seen[key]['ct1'], seen[key]['ct2']); j++) {
             newArr.push(parseInt(key))
