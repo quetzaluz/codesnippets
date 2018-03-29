@@ -17,7 +17,7 @@ class Solution:
                         this_coord = stack.pop()
                         this_area += 1
                         string_key_s = str(this_coord[0]) + ',' + str(this_coord[1] + 1)
-                        string_key_n = str(this_coord[0]) + ',' + str(this_coord[0] - 1)
+                        string_key_n = str(this_coord[0]) + ',' + str(this_coord[1] - 1)
                         string_key_w = str(this_coord[0] - 1) + ',' + str(this_coord[1])
                         string_key_e = str(this_coord[0] + 1) + ',' + str(this_coord[1])
                         if this_coord[1] + 1 < len(grid[0]) and grid[this_coord[0]][this_coord[1] + 1] == 1 and string_key_s not in seen:
