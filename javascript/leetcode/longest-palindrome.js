@@ -13,7 +13,8 @@ var longestPalindrome = function(s) {
         if (seen[k] % 2 == 0) {
             evens += seen[k]
         } else {
-            odds = seen[k] > odds ? seen[k] : odds
+            evens += seen[k] - 1
+            odds = 1
         }
     })
     return evens + odds
