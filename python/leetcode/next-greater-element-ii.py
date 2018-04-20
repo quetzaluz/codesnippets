@@ -1,19 +1,14 @@
 class Solution:
-    def scanForGreater(self, target, idx, nums):
-        i = 1
-        l = len(nums)
-        while i < l:
-            if nums[(idx + i) % l] > target:
-                return nums[(idx + i) % l]
-            i += 1
-        return -1
     def nextGreaterElements(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
         """
-        result = []
-        for idx in range(len(nums)):
-            n = nums[idx]
-            result.append(self.scanForGreater(n, idx, nums))
+        result = [-1] * len(nums)
+        stack = []
+        for i in range((len(nums) * 2) - 1, -1, -1):
+            while len(stack) > 0 and nums[stack[-1]] <= nums[i % len(nums)]:
+                stack.pop()
+            result[i % len(nums)] = -1 if len(stack) == 0 else nums[stack[-1]]
+            stack.append(i % len(nums))
         return result
