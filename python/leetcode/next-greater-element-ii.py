@@ -1,6 +1,6 @@
 class Solution:
     def scanForGreater(self, target, idx, nums):
-        i = 0
+        i = 1
         l = len(nums)
         while i < l:
             if nums[(idx + i) % l] > target:
