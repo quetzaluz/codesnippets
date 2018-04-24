@@ -34,18 +34,23 @@ class MagicDictionary:
                 continue
             if w['word'] == word:
                 continue
-            diff = 0
+            missing = 0
+            extra = 0
             for c in letter_freq:
                 if c not in w['freq']:
-                    diff += letter_freq[c]
+                    extra += letter_freq[c]
                 else:
-                    diff += w['freq'][c] - letter_freq[c]
-            if diff <= 1 and diff >= -1:
+                    if w['freq'][c] > letter_freq[c]:
+                        missing += w['freq'][c] - letter_freq[c]
+                    else:
+                        extra += letter_freq[c] - w['freq'][c]
+            for c in w['freq']:
+                if c not in letter_freq:
+                    missing += w['freq'][c]
+            if missing <= 1 and extra <= 1 and (extra - missing == 0):
                 found_word = True
                 break
         return found_word
-        
-
 
 # Your MagicDictionary object will be instantiated and called as such:
 # obj = MagicDictionary()
