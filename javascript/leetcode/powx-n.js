@@ -4,14 +4,11 @@
  * @return {number}
  */
 var myPow = function(x, n) {
-    if (n == 0) { return 1 }
-    neg = n <= 0
-    ite = (neg ? n * -1 : n) - 1
-    res = x
-    while (ite > 0) {
-        res *= x
-        ite--
+    if (n == 0) {
+        return 1
+    } else if (n % 2 === 0) {
+        return  myPow(x, parseInt(n / 2)) *  myPow(x, parseInt(n / 2))
+    } else {
+        return x *  myPow(x, parseInt(n / 2)) *  myPow(x, parseInt(n / 2))
     }
-    if (neg) { res = 1 / res }
-    return res
 };
