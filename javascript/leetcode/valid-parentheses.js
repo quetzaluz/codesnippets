@@ -4,9 +4,9 @@
  */
 
 var isValid = function(s) {
-    v = {p: {idx: [], cnt: 0}, s: {idx: [], cnt: 0}, c: {idx: [], cnt: 0}}
+    let v = {p: {idx: [], cnt: 0}, s: {idx: [], cnt: 0}, c: {idx: [], cnt: 0}}
     for (var i = 0; i <= s.length; i++) {
-        l = s[i]
+        let l = s[i]
         if (l == '(') {
             v = updateForOpenBrackets(v, 'p', i)
         } else if (l == ')') {
@@ -23,7 +23,7 @@ var isValid = function(s) {
             v = updateForClosedBrackets(v, 'c', 'p', 's')
             if (!v) { return v }
         }
-        prev = l
+        let prev = l
     }
     if (v['p'].cnt != 0 || v['s'].cnt != 0 || v['c'].cnt != 0) {
         return false
@@ -43,14 +43,14 @@ function updateForClosedBrackets(values, thisType, otherType1, otherType2) {
     if (hasUnclosedBrackets(values, thisType, otherType1, otherType2)) {
         return false
     } else {
-        v[thisType].cnt -= 1
-        v[thisType].idx.pop()
-        return v
+        values[thisType].cnt -= 1
+        values[thisType].idx.pop()
+        return values
     }
 }
 
 function updateForOpenBrackets(values, thisType, idx) {
-    v[thisType].cnt += 1
-    v[thisType].idx.push(idx)
-    return v
+    values[thisType].cnt += 1
+    values[thisType].idx.push(idx)
+    return values
 }
