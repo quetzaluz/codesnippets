@@ -15,22 +15,12 @@ function mergeLinkedLists( headA, headB) {
     newRoot.next = new Node()
     let newHead = newRoot.next
     while (headA || headB) {
-        if (!headA) {
+        if (!headA || (headB && headA.data >= headB.data)) {
             newHead.data = headB.data
             headB = headB.next 
             newHead.next = new Node()
             newHead = newHead.next
-        } else if (!headB) {
-            newHead.data = headA.data
-            headA = headA.next 
-            newHead.next = new Node()
-            newHead = newHead.next
-        } else if (headA.data >= headB.data) {
-            newHead.data = headB.data
-            headB = headB.next 
-            newHead.next = new Node()
-            newHead = newHead.next
-        } else if (headB.data >= headA.data) {
+        } else if (!headB || (headB.data >= headA.data)) {
             newHead.data = headA.data
             headA = headA.next 
             newHead.next = new Node()
