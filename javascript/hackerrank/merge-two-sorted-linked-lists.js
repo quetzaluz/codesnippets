@@ -18,14 +18,12 @@ function mergeLinkedLists( headA, headB) {
         if (!headA || (headB && headA.data >= headB.data)) {
             newHead.data = headB.data
             headB = headB.next 
-            newHead.next = new Node()
-            newHead = newHead.next
         } else if (!headB || (headB.data >= headA.data)) {
             newHead.data = headA.data
             headA = headA.next 
-            newHead.next = new Node()
-            newHead = newHead.next
         }
+        newHead.next = new Node()
+        newHead = newHead.next
     }
     return newRoot.next
 }
