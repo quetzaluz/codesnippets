@@ -11,9 +11,11 @@
 // You only need to complete this method.
 
 function mergeLinkedLists( headA, headB) {
+    if (!headA && !headB) {
+        return null
+    }
     let newRoot = new Node()
-    newRoot.next = new Node()
-    let newHead = newRoot.next
+    let newHead = newRoot
     while (headA || headB) {
         if (!headA || (headB && headA.data >= headB.data)) {
             newHead.data = headB.data
@@ -22,8 +24,10 @@ function mergeLinkedLists( headA, headB) {
             newHead.data = headA.data
             headA = headA.next 
         }
-        newHead.next = new Node()
-        newHead = newHead.next
+        if (headA || headB) {
+            newHead.next = new Node()
+            newHead = newHead.next
+        }
     }
-    return newRoot.next
+    return newRoot
 }

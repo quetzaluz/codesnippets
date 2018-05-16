@@ -11,11 +11,11 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function(headA, headB) {
-    let newRoot = new ListNode()
-    let newHead = newRoot
     if (!headA && !headB) {
         return null
     }
+    let newRoot = new ListNode()
+    let newHead = newRoot
     while (headA || headB) {
         if (!headA || (headB && headA.val > headB.val)) {
             newHead.val = headB.val
