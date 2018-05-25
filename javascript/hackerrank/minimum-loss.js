@@ -26,10 +26,9 @@ function readLine() {
 
 // Complete the minimumLoss function below.
 function minimumLoss(price) {
-    let sorted = []
-    for (var i = 0; i < price.length; i++) {
-        sorted.push([i, price[i]])
-    }
+    let sorted = price.map(function(v, i) {
+        return [i, v]
+    })
     sorted = sorted.sort(function(a, b) {
         if (a[1] < b[1]) {
             return 1
