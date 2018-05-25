@@ -26,13 +26,23 @@ function readLine() {
 
 // Complete the minimumLoss function below.
 function minimumLoss(price) {
-    let minLoss = Infinity;
+    let sorted = []
     for (var i = 0; i < price.length; i++) {
-        let x = price[i];
-        for (var j = i + 1; j < price.length; j++) {
-            if (price[j] < x && x - price[j] < minLoss) {
-                minLoss = x - price[j];
-            }
+        sorted.push([i, price[i]])
+    }
+    sorted = sorted.sort(function(a, b) {
+        if (a[1] < b[1]) {
+            return 1
+        } else if (a[1] > b[1]) {
+            return -1
+        } else {
+            return 0
+        }
+    })
+    let minLoss = Infinity;
+    for (var i = 1; i < sorted.length; i++) {
+        if (sorted[i - 1][0] < sorted[i][0] && sorted[i - 1][1] - sorted[i][1] < minLoss) {
+            minLoss = sorted[i - 1][1] - sorted[i][1]
         }
     }
     return minLoss
