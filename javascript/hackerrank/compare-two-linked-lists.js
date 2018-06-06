@@ -12,5 +12,15 @@
 // You only need to complete this method.
 
 function compareLinkedLists(headA, headB) {
-    
+    while (headA || headB) {
+        if (!headA || !headB) {
+            return 0
+        }
+        if (headA.data !== headB.data) {
+            return 0
+        }
+        headA = headA.next
+        headB = headB.next
+    }
+    return 1
 }
