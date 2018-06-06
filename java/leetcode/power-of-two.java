@@ -5,6 +5,6 @@ class Solution {
         while (num > divisor) {
             num /= divisor;
         }
-        return num == 2 || num == 1;
+        return num == 1 || num == divisor;
     }
 }
