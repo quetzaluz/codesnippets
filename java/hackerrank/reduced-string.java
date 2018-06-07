@@ -10,19 +10,15 @@ public class Solution {
 
     // Complete the super_reduced_string function below.
     static String super_reduced_string(String s) {
-        StringBuilder res = new StringBuilder();
-        char[] chars = s.toCharArray();
-        int i = 0;
-        while (i < chars.length) {
-            if ((i + 1) < chars.length && chars[i] == chars[i + 1]) {
-                i++;
-            } else {
-                System.out.println("append " + chars[i]);
-                res.append(chars[i]);
+        int i = 1;
+        while (i < s.length()) {
+            if (s.charAt(i - 1) == s.charAt(i)) {
+                s = s.substring(0, i - 1) + s.substring(i + 1);
+                i = 0;
             }
             i++;
         }
-        return res.length() == 0 ? "Empty String" : res.toString();
+        return s.length() == 0 ? "Empty String" : s;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
