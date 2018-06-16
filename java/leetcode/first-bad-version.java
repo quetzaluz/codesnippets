@@ -7,7 +7,7 @@ public class Solution extends VersionControl {
         int r = n;
         int m;
         while (l < r) {
-            m = Math.round(l + (r - l) / 2);
+            m = l + Math.round(((r - l) / 2));
             if (isBadVersion(m)) {
                 r = m;
             } else {
