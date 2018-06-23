@@ -4,31 +4,29 @@ import java.util.*;
 public class Solution {
     static boolean isAnagram(String a, String b) {
         // Complete the function
-		if (a.length() != b.length()) { return false; }
+        if (a.length() != b.length()) { return false; }
         HashMap<Character, Integer> hmapA = new HashMap<Character, Integer>();
         HashMap<Character, Integer> hmapB = new HashMap<Character, Integer>();
         int i = 0;
-		while (i < a.length()) {
-            if (hmapA.get(a.charAt(i)) > 0) {
-                int newValue = hmapA.get(a.charAt(i)) + 1;
-                hmapA.put(a.charAt(i), newValue);
-            } else {
-                hmapA.put(a.charAt(i), 1);
-            }
+        int newValue = 0;
+        char lowerCaseChar;
+        while (i < a.length()) {
+            lowerCaseChar = Character.toLowerCase(a.charAt(i));
+            newValue = hmapA.getOrDefault(lowerCaseChar, 0) + 1;
+            hmapA.put(lowerCaseChar, newValue);
             i++;
-		}
+        }
         i = 0;
-		while (i < b.length()) {
-            if (hmapB.get(b.charAt(i)) > 0) {
-                int newValue = hmapB.get(b.charAt(i)) + 1;
-                hmapB.put(b.charAt(i), newValue);
-            } else {
-                hmapA.put(a.charAt(i), 1);
+        while (i < b.length()) {
+            lowerCaseChar = Character.toLowerCase(b.charAt(i));
+            newValue = hmapB.getOrDefault(lowerCaseChar, 0) + 1;
+            hmapB.put(lowerCaseChar, newValue);
+            if (!hmapA.containsKey(lowerCaseChar) || hmapB.get(lowerCaseChar) > hmapA.get(lowerCaseChar)) {
+                return false;
             }
-			if (hmapB.getOrDefault(a.charAt(i), 0) > hmapA.getOrDefault(b.charAt(i), 0) > 0) { return false; }
             i++;
-		}
-		return true;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
