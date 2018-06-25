@@ -10,25 +10,25 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        pAtraversals = 0
-        pBtraversals = 0
+        pATraversals = 0
+        pBTraversals = 0
         rootA = ListNode(0)
         rootA.next = headA
         rootB = ListNode(0)
         rootB.next = headB
         pA = headA
         pB = headB
-        while pAtraversals < 2 and pBtraversals < 2:
+        while pATraversals < 2 and pBTraversals < 2:
             if (pA and pB and pA.val == pB.val):
                 return pA
             if pA is None or pA.next is None:
                 pA = rootB.next
-                pAtraversals += 1
+                pATraversals += 1
             else:
                 pA = pA.next
             if pB is None or pB.next is None:
                 pB = rootA.next
-                pBtraversals += 1
+                pBTraversals += 1
             else:
                 pB = pB.next
         return

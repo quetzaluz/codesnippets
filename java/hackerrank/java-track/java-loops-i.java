@@ -25,3 +25,4 @@ public class Solution {
         scanner.close();
     }
 }
+(int)Math.pow(2, i)*b
