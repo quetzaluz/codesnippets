@@ -1,5 +1,5 @@
 class Solution {
-    public int[] spiralOrder(int[][] matrix) {
+    public List<Integer> spiralOrder(int[][] matrix) {
         int startN = 0;
         int endN = matrix.length - 1;
         int startM = 0;
@@ -36,6 +36,6 @@ class Solution {
             }
 
         }
-        return result;
+        return Arrays.stream(result).boxed().collect(Collectors.toList());
     }
 }
