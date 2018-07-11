@@ -1,35 +1,45 @@
 class Solution:
-    def spiralOrder(self, matrix):
+    def generateMatrix(self, n):
         """
-        :type matrix: List[List[int]]
-        :rtype: List[int]
+        :type n: int
+        :rtype: List[List[int]]
         """
         start_n = 0
-        end_n = len(matrix) - 1
+        end_n = n - 1
         start_m = 0
-        end_m = len(matrix[0]) - 1 if len(matrix) > 0 else - 1
-        result = []
-        
+        end_m = n - 1
+        matrix = self.initializeMatrix(n)
+        position = 1
         while start_n <= end_n and start_m <= end_m:
             # Go across the top of the matrix
             for i in range(start_m, end_m + 1):
-                result.append(matrix[start_n][i])
+                matrix[start_n][i] = position
+                position += 1
             start_n += 1
-        
+
             # Go down the right of the matrix
             for i in range(start_n, end_n + 1):
-                result.append(matrix[i][end_m])
+                matrix[i][end_m] = position
+                position += 1
             end_m -= 1
 
             # Go back along the bottom
             if start_n <= end_n:
                 for i in range(end_m, start_m - 1, -1):
-                    result.append(matrix[end_n][i])
+                    matrix[end_n][i] = position
+                    position += 1
                 end_n -= 1
 
             # Go up along the left
             if start_m <= end_m:
                 for i in range(end_n, start_n - 1, -1):
-                    result.append(matrix[i][start_m])
+                    matrix[i][start_m] = position
+                    position += 1
                 start_m += 1
-        return result
+        return matrix
+
+    def initializeMatrix(self, n):
+        matrix = []
+        for i in range(n):
+            matrix.append([0] * n)
+        return matrix
