@@ -4,11 +4,4 @@ class Solution:
         :type num: int
         :rtype: bool
         """
-        if num <= 1:
-            return True
-        i = 1
-        while i <= num / 2:
-            if i * i == num:
-                return True
-            i += 1
-        return False
+        return num**0.5 == int(num**0.5)
