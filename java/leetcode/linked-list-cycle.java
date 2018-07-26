@@ -9,15 +9,14 @@
  *     }
  * }
  */
-
-class Solution {
-    public bool hasCycle(ListNode head) {
+public class Solution {
+    public boolean hasCycle(ListNode head) {
         HashMap<Integer, Integer> candidates = new HashMap<Integer, Integer>();
-        while (head) {
-            if (candidates.hasKey(head.val)) {
+        while (head != null) {
+            if (candidates.containsKey(head.val)) {
                 return true;
             } else {
-                candidates.set(head.val, 1);
+                candidates.put(head.val, 1);
             }
             head = head.next;
         }
