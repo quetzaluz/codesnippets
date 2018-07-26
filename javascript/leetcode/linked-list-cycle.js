@@ -11,14 +11,15 @@
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    var candidates = {}
-    while (head) {
-      if (candidates[head.val]) {
-        return true
-      } else {
-        candidates[head.val] = 1
+    if (head === null) { return false; }
+    var slow = head;
+    var fast = head.next;
+    while (fast !== slow) {
+      if (slow === null || fast === null) {
+        return false;
       }
-      head = head.next
+      slow = slow.next;
+      fast = fast.next !== null ? fast.next.next : fast.next;
     }
-    return false
+    return true;
 };
