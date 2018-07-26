@@ -11,15 +11,16 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        HashMap<Integer, Integer> candidates = new HashMap<Integer, Integer>();
-        while (head != null) {
-            if (candidates.containsKey(head.val)) {
-                return true;
-            } else {
-                candidates.put(head.val, 1);
+        if (head == null) { return false; }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (fast != slow) {
+            if (slow == null || fast == null) {
+                return false;
             }
-            head = head.next;
+            slow = slow.next;
+            fast = fast.next != null ? fast.next.next : fast.next;
         }
-        return false;
+        return true;
     }
 }
