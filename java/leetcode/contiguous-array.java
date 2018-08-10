@@ -1,25 +1,15 @@
 class Solution {
     public int findMaxLength(int[] nums) {
         int maxLength = 0;
-        int thisMaxLength;
-        int balance;
-        int j;
+        int balance = 0;
+        HashMap<Integer, Integer> results = new HashMap();
+        results.put(0, 0);
         for (int i = 0; i < nums.length; i++) {
-            thisMaxLength = 0;
-            balance = 0;
-            j = i;
-            while (j < nums.length) {
-                balance += nums[j] == 0 ? -1 : 1;
-                thisMaxLength++;
-                if (balance == 0 && thisMaxLength > maxLength) {
-                    maxLength = thisMaxLength;
-                }
-                j++;
-            }
-            if (balance == 0) {
-                if (thisMaxLength > maxLength) {
-                    maxLength = thisMaxLength;
-                }
+            balance += nums[i] == 0 ? -1 : 1;
+            if (results.containsKey(balance)) {
+                maxLength = Math.max(maxLength, i + 1 - results.get(balance));
+            } else {
+                results.put(balance, i + 1);
             }
         }
         return maxLength;
