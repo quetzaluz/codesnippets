@@ -8,8 +8,6 @@ class Solution:
         l = 0
         r = len(nums)
         while l < r:
-            if nums[l] == target:
-                return l
             m = l + (r - l) // 2
             if nums[m] > target:
                 r = m
