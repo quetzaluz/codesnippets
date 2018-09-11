@@ -4,31 +4,14 @@
  * @return {number}
  */
 var findMaxAverage = function(nums, k) {
-    startIdx = 0
-    maxA = k == 1 ? nums[startIdx] : -Infinity
-    while (startIdx < nums.length) {
-        thisSum = nums[startIdx]
-        thisLength = 1
-        if (k == 1) {
-            thisA = thisSum / thisLength
-            if (thisA > maxA) {
-                maxA = thisA
-            }
-        } else {
-            for (var i = startIdx + 1; i < nums.length; i++) {
-                thisSum += nums[i]
-                thisLength += 1
-                if (thisLength == k) {
-                    thisA = thisSum / thisLength
-                    if (thisA > maxA) {
-                        maxA = thisA
-                    }
-                }
-            }
-        }
-        startIdx++
+    var thisSum = 0;
+    for (var i = 0; i < k; i++) {
+        thisSum += nums[i];
     }
-
-
-    return maxA 
+    var maxSum = thisSum;
+    for (var i = k; i < nums.length; i++) {
+        thisSum += nums[i] - nums[i - k];
+        maxSum = Math.max(maxSum, thisSum);
+    }
+    return maxSum / k;
 };
