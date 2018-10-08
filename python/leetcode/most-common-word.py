@@ -12,7 +12,6 @@ class Solution:
         translator = str.maketrans('', '', string.punctuation)
         for w in paragraph.split(' '):
             wKey = w.translate(translator).lower()
-            print(wKey)
             if wKey not in ban:
                 if wKey in seen:
                     seen[wKey] += 1

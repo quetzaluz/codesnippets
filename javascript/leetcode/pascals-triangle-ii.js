@@ -9,7 +9,7 @@ var getRow = function(rowIndex) {
         result.push(generateRow(result[iterations - 1]))
         iterations++
     }
-    console.log(result)
+
     return result[rowIndex] 
 };
 

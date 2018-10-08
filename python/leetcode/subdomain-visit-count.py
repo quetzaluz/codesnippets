@@ -23,7 +23,6 @@ class Solution:
             val = int(spl[0])
             dom = spl[1]
             while True:
-                print(dom)
                 exists_index = self.findEntryIndex(dom)
                 if exists_index != -1:
                     self.seen[exists_index] = [self.seen[exists_index][0] + val, dom]

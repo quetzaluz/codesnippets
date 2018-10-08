@@ -9,7 +9,6 @@ class Solution:
         x = 0
         result = []
         while y < len(matrix) and x < len(matrix[0]):
-            print ([y,x])
             result.append(matrix[y][x])
             if up:
                 if x + 1 < len(matrix[0]) and y - 1 >= 0:
