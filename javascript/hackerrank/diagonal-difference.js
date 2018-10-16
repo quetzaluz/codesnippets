@@ -12,8 +12,10 @@ process.stdin.on('data', inputStdin => {
     inputString += inputStdin;
 });
 
-process.stdin.on('end', _ => {
-    inputString = inputString.trim().split('\n').map(str => str.trim());
+process.stdin.on('end', function() {
+    inputString = inputString.replace(/\s*$/, '')
+        .split('\n')
+        .map(str => str.replace(/\s*$/, ''));
 
     main();
 });
@@ -22,13 +24,8 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-/*
- * Complete the diagonalDifference function below.
- */
+// Complete the diagonalDifference function below.
 function diagonalDifference(a) {
-    /*
-     * Write your code here.
-     */
     let firstSum = 0
     let secondSum = 0
     let c = 0
@@ -39,7 +36,7 @@ function diagonalDifference(a) {
         r++
     }
     r = 0
-    c = a.length - 1
+    c--
     while (c >= 0) {
         secondSum += a[c][r]
         c--
@@ -53,15 +50,15 @@ function main() {
 
     const n = parseInt(readLine(), 10);
 
-    let a = Array(n);
+    let arr = Array(n);
 
-    for (let aRowItr = 0; aRowItr < n; aRowItr++) {
-        a[aRowItr] = readLine().split(' ').map(aTemp => parseInt(aTemp, 10));
+    for (let i = 0; i < n; i++) {
+        arr[i] = readLine().split(' ').map(arrTemp => parseInt(arrTemp, 10));
     }
 
-    let result = diagonalDifference(a);
+    const result = diagonalDifference(arr);
 
-    ws.write(result + "\n");
+    ws.write(result + '\n');
 
     ws.end();
 }
