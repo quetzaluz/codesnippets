@@ -26,20 +26,23 @@ function readLine() {
 
 // Complete the repeatedString function below.
 function repeatedString(s, n) {
-    // const repeats = Math.ceil(s.length / n);
+    const repeats = Math.floor(n / s.length);
+    const remainder = n % s.length;
+
     let i = 0;
-    let c = 0;
-    while (i < n) {
-        let j = 0
-        while (i < n && j < s.length) {
-            if (s[j] === 'a') {
-                c++;
+    let fullCount = 0;
+    let remainderCount = 0;
+
+    while (i < s.length) {
+        if (s[i] === 'a') {
+            if (i < remainder) {
+                remainderCount++;
             }
-            i++;
-            j++;
+            fullCount++;
         }
+        i++;
     }
-    return c;
+    return (fullCount * repeats) + remainderCount;
 }
 
 function main() {
