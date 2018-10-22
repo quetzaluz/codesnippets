@@ -6,34 +6,27 @@ class Solution:
         :rtype: int
         """
         c = 0
-        directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+        directions, obstacles = [(0, 1), (1, 0), (0, -1), (-1, 0)], set(map(tuple, obstacles))
         dir_pos = 0
         x = 0
         y = 0
         max_distance = 0
         while c < len(commands):
-            if commands[c] == -1:
+            command = commands[c]
+            if command == -1:
                 dir_pos = (dir_pos + 1) % 4
-            elif commands[c] == -2:
-                dir_pos -= 1
-                if dir_pos == -1:
-                    dir_pos = 3
+            elif command == -2:
+                dir_pos = (dir_pos - 1) % 4
             else:
-                steps = commands[c]
-                while steps > 0:
+                while command > 0:
                     nextX = x + directions[dir_pos][0]
                     nextY = y + directions[dir_pos][1]
-                    nextCoord = [nextX, nextY]
-                    try:
-                        obstacles.index(nextCoord)
-                        # Obstacle at next coord if error not thrown
-                        steps = 0
-                    except:
-                        # No error / obstacle, set x and y and mark step done
-                        x = nextX
-                        y = nextY
-                        steps -= 1
-            if (x * x) + (y * y) > max_distance:
-                max_distance = (x * x) + (y * y)
+                    nextCoord = (nextX, nextY)
+                    if nextCoord in obstacles:
+                        break
+                    x = nextX
+                    y = nextY
+                    command -= 1
+                max_distance = max(max_distance, x**2 + y**2)
             c += 1
         return max_distance
