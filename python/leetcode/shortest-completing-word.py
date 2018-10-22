@@ -16,6 +16,12 @@ class Solution:
         return shortest_word
     
     def pull_letters(self, license_plate):
+        """
+        Could use regex for consistency with other solutions, but performance is slower:
+        import re
+        def pull_letters(self, license_plate):
+            return list(re.sub(r'[\d|\s]?', '', license_plate.lower()))
+        """
         letters_only = []
         for c in license_plate.lower():
             if c.isalpha():
