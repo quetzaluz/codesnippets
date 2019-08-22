@@ -10,19 +10,19 @@ import java.util.stream.Collectors;
  * }
  */
 class Solution {
-    public List<List<Double>> levelData;
+    public List<List<Integer>> levelData;
     public List<Double> averageOfLevels(TreeNode root) {
-        levelData = new ArrayList<List<Double>>();
+        levelData = new ArrayList<List<Integer>>();
         traverse(root, 0);
-        return levelData.stream().map(data -> data.stream().reduce(0.0, (n, acc) -> n + acc) / data.size()).collect(Collectors.toList());
+        return calculateResult();
     }
 
     public void traverse(TreeNode root, int levelIndex) {
-        if (levelData.size() < levelIndex + 1) {
-            levelData.add(new ArrayList<Double>());
+        if (levelData.size() == levelIndex) {
+            levelData.add(new ArrayList<Integer>());
         }
-        List<Double> data = levelData.get(levelIndex);
-        data.add(new Double(root.val));
+        List<Integer> data = levelData.get(levelIndex);
+        data.add(root.val);
         if (root.left != null) {
             traverse(root.left, levelIndex + 1);
         }
@@ -31,5 +31,18 @@ class Solution {
             traverse(root.right, levelIndex + 1);
         }
         levelData.set(levelIndex, data);
+    }
+
+    List<Double> calculateResult() {
+        List<Double> result = new ArrayList<>();
+        for (List<Integer> d : levelData) {
+            double sum = 0;
+            for (Integer v : d) {
+                sum += v;
+            }
+            result.add(sum / d.size());
+        }
+
+        return result;
     }
 }
