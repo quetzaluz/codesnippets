@@ -11,30 +11,9 @@
  * @return {number}
  */
 var kthSmallest = function(root, k) {
-    const a = new Array(k);
-    const updateArray = function(v) {
-        let tmp;
-        let inserted = false;
-        for (var i = 0; i < k; i++) {
-            if ((a[i] == null || v < a[i])) {
-                if (!inserted) {
-                    tmp = v;
-                    inserted = true;
-                }
-            }
-            if (tmp) {
-                a[i + 1] = a[i];
-                a[i] = tmp;
-                tmp = a[i + 1];
-            }
-        }
-    }
     const traverse = function(root) {
-        if (root == null) { return }
-        updateArray(root.val)
-        traverse(root.left)
-        traverse(root.right)
+        if (root == null) { return [] }
+        return traverse(root.left).concat([root.val]).concat(traverse(root.right));
     }
-    traverse(root)
-    return a[k - 1];
+    return traverse(root)[k - 1];
 };
