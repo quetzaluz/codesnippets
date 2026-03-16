@@ -2,3 +2,10 @@
 tmp_stackoverflow
 general/google_question_quicksheet*
 .todos
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
