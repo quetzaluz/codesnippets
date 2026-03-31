@@ -1,31 +1,42 @@
+from collections import defaultdict
+from heapq import heappop, heappush
+from typing import List
+
+
 class Solution:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
-        # Collect heights at every point of x where x is the array index
-        heights = []
+        # Critical points only change at building edges; (L,-H) before (R,H) at same x
+        # because starts sort before ends, taller starts before shorter ones, shorter ends before taller.
+        events = []
+        for left, right, height in buildings:
+            events.append((left, -height))
+            events.append((right, height))
+        events.sort()
 
-        for building in buildings:
-            i = 0
-            left = building[0]
-            right = building[1]
-            height = building[2]
-            while i < right:
-                # Always init value in heights if not exists
-                if i >= len(heights):
-                    heights.append(0)
-                
-                if i >= left and height > heights[i]:
-                    heights[i] = height
-                i += 1
-        
-        # Collect coordinate at every height change
+        # Max-heap via negative heights; lazy-remove counts for ended buildings.
+        heap = [0]
+        removed = defaultdict(int)
+        result: List[List[int]] = []
+
+        def prune() -> None:
+            while heap and removed[-heap[0]] > 0:
+                removed[-heap[0]] -= 1
+                heappop(heap)
+
         i = 0
-        coords = []
-        last_height = 0
-        while i < len(heights):
-            this_height = heights[i]
-            if this_height != last_height:
-                coords.append([i, this_height])
-                last_height = this_height
-            i += 1
-        coords.append([len(heights),0])
-        return coords
+        n = len(events)
+        while i < n:
+            x = events[i][0]
+            while i < n and events[i][0] == x:
+                _, h = events[i]
+                if h < 0:
+                    heappush(heap, h)
+                else:
+                    removed[h] += 1
+                i += 1
+            prune()
+            curr = -heap[0]
+            if not result or result[-1][1] != curr:
+                result.append([x, curr])
+
+        return result
